@@ -21,4 +21,28 @@ class OpeningHoursConverterKtTest {
 
         assertThat(result).isEqualTo(expected)
     }
+
+    @Test
+    fun `should return two opening hours blocks`() {
+        val openingHoursJson = """{
+            "openingHoursSpecification": [
+                {
+                    "dayOfWeek": ["Monday"],
+                    "opens": "10:00",
+                    "closes": "18:00"
+                },
+                {
+                    "dayOfWeek": ["Saturday"],
+                    "opens": "09:00",
+                    "closes": "22:00"
+                }
+            ]
+        }"""
+
+        val result = convertOpeningHours(openingHoursJson)
+
+        val expected = "Mon: 10am-6pm | Sat: 9am-10pm"
+
+        assertThat(result).isEqualTo(expected)
+    }
 }

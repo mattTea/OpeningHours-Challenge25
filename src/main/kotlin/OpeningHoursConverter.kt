@@ -7,7 +7,7 @@ fun convertOpeningHours(hoursSpecification: String): String {
         Triple(toDaysList(it.dayOfWeek), to12hour(it.opens), to12hour(it.closes))
     }
 
-    return "${hoursGroups[0].first}: ${hoursGroups[0].second}-${hoursGroups[0].third}"
+    return combineHoursGroups(hoursGroups)
 }
 
 data class HoursSpecification(
@@ -35,6 +35,9 @@ private fun to12hour(time: String): String {
 private fun toDaysList(days: List<String>): String {
     return days[0].take(3)
 }
+
+private fun combineHoursGroups(hoursGroups: List<Triple<String, String, String>>): String =
+    hoursGroups.map { "${it.first}: ${it.second}-${it.third }" }.joinToString(" | ")
 
 //private enum class Days(val fullName: String) {
 //    Mon("Monday"),
