@@ -23,7 +23,7 @@ class OpeningHoursConverterKtTest {
     }
 
     @Test
-    fun `should return two opening hours blocks`() {
+    fun `should return two opening hours blocks with single day in each`() {
         val openingHoursJson = """{
             "openingHoursSpecification": [
                 {
@@ -45,4 +45,27 @@ class OpeningHoursConverterKtTest {
 
         assertThat(result).isEqualTo(expected)
     }
+
+    @Test
+    fun `should return two consecutive days in single hours block`() {
+        val openingHoursJson = """{
+            "openingHoursSpecification": [
+                {
+                    "dayOfWeek": ["Monday", "Tuesday"],
+                    "opens": "10:00",
+                    "closes": "18:00"
+                }
+            ]
+        }"""
+
+        val result = convertOpeningHours(openingHoursJson)
+
+        val expected = "Mon-Tue: 10am-6pm"
+
+        assertThat(result).isEqualTo(expected)
+    }
+
+    // 2 non-consecutive days
+
+    // 3 consecutive days
 }

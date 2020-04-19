@@ -33,11 +33,11 @@ private fun to12hour(time: String): String {
 }
 
 private fun toDaysList(days: List<String>): String {
-    return days[0].take(3)
+    return days.joinToString("-") { it.take(3) }
 }
 
 private fun combineHoursGroups(hoursGroups: List<Triple<String, String, String>>): String =
-    hoursGroups.map { "${it.first}: ${it.second}-${it.third }" }.joinToString(" | ")
+    hoursGroups.joinToString(" | ") { "${it.first}: ${it.second}-${it.third}" }
 
 //private enum class Days(val fullName: String) {
 //    Mon("Monday"),
