@@ -65,7 +65,47 @@ class OpeningHoursConverterKtTest {
         assertThat(result).isEqualTo(expected)
     }
 
-    // 2 non-consecutive days
+    @Test
+    fun `should return three consecutive days in single hours block`() {
+        val openingHoursJson = """{
+            "openingHoursSpecification": [
+                {
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
+                    "opens": "10:00",
+                    "closes": "18:00"
+                }
+            ]
+        }"""
 
-    // 3 consecutive days
+        val result = convertOpeningHours(openingHoursJson)
+
+        val expected = "Mon-Wed: 10am-6pm"
+
+        assertThat(result).isEqualTo(expected)
+    }
+
+    @Test
+    fun `should return 'closed' for a midnight-midnight hours`() {
+        val openingHoursJson = """{
+            "openingHoursSpecification": [
+                {
+                    "dayOfWeek": ["Monday"],
+                    "opens": "00:00",
+                    "closes": "00:00"
+                }
+            ]
+        }"""
+
+        val result = convertOpeningHours(openingHoursJson)
+
+        val expected = "Mon: Closed"
+
+        assertThat(result).isEqualTo(expected)
+    }
+
+    /*
+    Further enhancements
+    1. Is it possible to have 2 non-consecutive days in a single hoursBlock? Current implementation assumes not
+    2. Will days in an hoursBlock always be presented in order? Current implementation assumes so
+    */
 }
