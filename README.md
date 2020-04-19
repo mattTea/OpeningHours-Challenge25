@@ -5,6 +5,14 @@ Opening Hours
 
 ------
 
+## Solution
+
+Solution output is of format...
+
+**Mon: Closed | Tue-Thu: 5pm-10pm | Wed-Thu: 12pm-2pm | Fri-Sat: 12pm-10.30pm | Sun: 12pm-5pm**
+
+------
+
 ## Instructions
 
 An app that aggregates information about retail businesses shows the opening hours for each shop.
